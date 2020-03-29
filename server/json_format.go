@@ -1,4 +1,4 @@
-package apiserver
+package server
 
 type ResponseInfo struct {
 	Success bool        `json:"success"`

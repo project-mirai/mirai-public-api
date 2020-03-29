@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/mamoe/mirai-public-api/apiserver"
+	"github.com/mamoe/mirai-public-api/server"
 )
 
 func main() {
-	server := apiserver.MiraiApiServer{}
+	server := server.MiraiApiServer{}
 	server.LoadAll()
 }
