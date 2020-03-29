@@ -7,7 +7,7 @@ import (
 )
 
 func PluginListPage(ctx *fasthttp.RequestCtx) {
-	paths, err := walkDir(Config["basicRepoPath"] + "/" + Config["pluginListPath"])
+	paths, err := walkDir(GetMiraiApiServer().Config["basicRepoPath"] + "/" + GetMiraiApiServer().Config["pluginListPath"])
 	res := ResponseInfo{
 		Success: err == nil,
 		Info:    "success",
