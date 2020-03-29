@@ -1,7 +1,7 @@
 package apiserver
 
 type ResponseInfo struct {
-	Success bool
-	Info    string
-	Result  interface{}
+	Success bool        `json:"success"`
+	Info    string      `json:"info"`
+	Result  interface{} `json:"result"`
 }
