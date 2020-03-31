@@ -1,0 +1,1 @@
+crontab 0 */15 * * * bash /PATH_TO_YOUR_PROJECT/update.sh
