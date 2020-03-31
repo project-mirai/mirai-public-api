@@ -13,6 +13,6 @@ type BasicPluginInfo struct {
 	Core        string   `json:"core"`
 	Console     string   `json:"console"`
 	Description string   `json:"description"`
-	Tag         []string `json:"tag"`
+	Tags        []string `json:"tags"`
 	Commands    []string `json:"commands"`
 }
