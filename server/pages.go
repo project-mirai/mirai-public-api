@@ -7,16 +7,14 @@ import (
 )
 
 func PluginListPage(ctx *fasthttp.RequestCtx) {
-	paths, err := walkDir(GetMiraiApiServer().Config["basicRepoPath"] + "/" + GetMiraiApiServer().Config["pluginListPath"])
+	//paths, err := walkDir(GetMiraiApiServer().Config["basicRepoPath"])//+ "/" + GetMiraiApiServer().Config["pluginListPath"])
+
 	res := ResponseInfo{
-		Success: err == nil,
+		Success: true,
 		Info:    "success",
-		Result:  paths,
-	}
-	if err != nil {
-		res.Result = err
+		Result:  GetService().PluginBasicJsonInfo,
 	}
 
-	resp, err := json.Marshal(res)
+	resp, _ := json.Marshal(res)
 	fmt.Fprintf(ctx, string(resp))
 }

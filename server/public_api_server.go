@@ -12,10 +12,19 @@ type MiraiApiServer struct {
 	Config     map[string]string
 	Logger     *logger.MiraiLogger
 	Router     *fasthttprouter.Router
+	Service    *Service
 }
 
 func RunMiraiApiServer() {
 	miraiApiServer.Init()
+}
+
+func GetService() *Service {
+	return GetMiraiApiServer().Service
+}
+
+func (this *MiraiApiServer) ConstructPluginPath() string {
+	return this.Config["basicRepoPath"]
 }
 
 func GetMiraiApiServer() *MiraiApiServer {

@@ -21,8 +21,18 @@ func walkDir(dir string) ([]string, error) {
 	var result []string
 	for _, file := range files {
 		if file.IsDir() {
-			result = append(result, file.Name())
+			if file.Name() != ".git" { //忽略项目中的.git文件夹
+				result = append(result, file.Name())
+			}
 		}
 	}
 	return result, nil
+}
+
+func ReadFile(path string) (string, error) {
+	bytes, err := ioutil.ReadFile(path)
+	if err != nil {
+		return "", err
+	}
+	return string(bytes), nil
 }

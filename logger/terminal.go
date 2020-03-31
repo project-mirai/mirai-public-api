@@ -2,12 +2,14 @@ package logger
 
 import (
 	"github.com/wsxiaoys/terminal"
+	"github.com/wsxiaoys/terminal/color"
 	"time"
 )
 
 type MiraiLogger struct {
-	Prefix   string
-	Terminal *terminal.TerminalWriter
+	Prefix      string
+	Terminal    *terminal.TerminalWriter
+	ColorPrefix string
 }
 
 func NewLogger(prefix string) *MiraiLogger {
@@ -18,5 +20,5 @@ func NewLogger(prefix string) *MiraiLogger {
 }
 
 func (this *MiraiLogger) Log(b string) {
-	this.Terminal.Write([]byte("[" + this.Prefix + " | " + time.Now().Format("2006-01-02 15:04:05") + "]" + b + "\n"))
+	color.Print(this.ColorPrefix + "[" + this.Prefix + " | " + time.Now().Format("2006-01-02 15:04:05") + "]" + b + "\n")
 }

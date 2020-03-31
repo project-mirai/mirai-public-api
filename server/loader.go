@@ -23,6 +23,9 @@ func (this *MiraiApiServer) Init() {
 	//config
 	this.Logger.Log("Loading config")
 	this.initConfig()
+	//service
+	this.Service = &Service{}
+	this.Service.initScan()
 	//start
 	this.Logger.Log("Starting fasthttp Server")
 	log.Fatal(fasthttp.ListenAndServe(this.Config["listenHTTP"], this.Router.Handler))
