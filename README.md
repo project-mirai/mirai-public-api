@@ -19,7 +19,13 @@ Mirai 是一个在全平台下运行，提供 QQ Android 和 TIM PC 协议支持
 
 
 # mirai-public-api
-```mirai-public-api```使用```go```编写，提供支持高并发的公共分发API，用于```mirai```的公共API服务。
+```mirai-public-api```使用```go```编写，提供支持高并发的公共分发API，用于```mirai```的公共API服务(面向使用者的插件中心)。
+
+### Configure Task
+使用前修改update.cron中的文件目录
+```shell script
+crontab -u username update.cron
+```
 
 ### 插件列表获取
 ```http request
