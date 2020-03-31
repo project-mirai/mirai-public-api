@@ -18,3 +18,12 @@ func PluginListPage(ctx *fasthttp.RequestCtx) {
 	resp, _ := json.Marshal(res)
 	fmt.Fprintf(ctx, string(resp))
 }
+
+func PluginDetailedInfoPage(ctx *fasthttp.RequestCtx) {
+	if value, ok := GetService().PluginInfoMap[string(ctx.QueryArgs().Peek("name"))]; ok {
+		fmt.Fprintf(ctx, value.JsonFile)
+		return
+	}
+	fmt.Fprint(ctx, "err:not found")
+	ctx.Response.SetStatusCode(404)
+}

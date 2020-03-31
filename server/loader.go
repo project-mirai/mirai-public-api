@@ -20,6 +20,7 @@ func (this *MiraiApiServer) Init() {
 	this.Logger.Log("Loading fasthttp router...")
 	this.Router = fasthttprouter.New()
 	this.Router.GET("/getPluginList", PluginListPage)
+	this.Router.GET("/getPluginDetailedInfo", PluginDetailedInfoPage)
 	//config
 	this.Logger.Log("Loading config")
 	this.initConfig()

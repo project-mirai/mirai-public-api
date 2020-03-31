@@ -92,8 +92,8 @@ func (this *Service) initScan() {
 	this.logger = logger2.NewLogger("MiraiService")
 	this.logger.ColorPrefix = "@y"
 	this.runSchedule()
-	c := cron.New()                   // 新建一个定时任务对象
-	c.AddFunc("0 */1 * * *", func() { //每十五分钟更新一次
+	c := cron.New()                    // 新建一个定时任务对象
+	c.AddFunc("0 */15 * * *", func() { //每十五分钟更新一次
 		this.runSchedule()
 	})
 	c.Start()
