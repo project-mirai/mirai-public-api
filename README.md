@@ -20,3 +20,13 @@ Mirai 是一个在全平台下运行，提供 QQ Android 和 TIM PC 协议支持
 
 # mirai-public-api
 ```mirai-public-api```使用```go```编写，提供支持高并发的公共分发API，用于```mirai```的公共API服务。
+
+### 插件列表获取
+```http request
+https://miraiapi.jasonczc.cn/getPluginList
+```
+
+### 插件详细信息获取
+```http request
+https://miraiapi.jasonczc.cn/getPluginDetailedInfo?name=mirai-native
+```
