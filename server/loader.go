@@ -39,7 +39,7 @@ func (this *MiraiApiServer) Init() {
 }
 
 func (this *MiraiApiServer) initNotFoundPage() {
-	page, err := ReadFile("static/404.html")
+	page, err := ReadFile("static/404")
 	if err != nil {
 		this.Logger.Log(err.Error())
 	}
