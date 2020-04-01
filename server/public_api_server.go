@@ -8,11 +8,12 @@ import (
 var miraiApiServer = &MiraiApiServer{}
 
 type MiraiApiServer struct {
-	ConfigPath string
-	Config     map[string]string
-	Logger     *logger.MiraiLogger
-	Router     *fasthttprouter.Router
-	Service    *Service
+	ConfigPath   string
+	Config       map[string]string
+	Logger       *logger.MiraiLogger
+	Router       *fasthttprouter.Router
+	Service      *Service
+	NotFoundPage string //提前写入内存
 }
 
 func RunMiraiApiServer() {

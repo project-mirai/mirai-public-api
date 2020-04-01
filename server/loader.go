@@ -2,6 +2,7 @@ package server
 
 import (
 	"bufio"
+	"fmt"
 	"github.com/buaazp/fasthttprouter"
 	"github.com/mamoe/mirai-public-api/logger"
 	"github.com/valyala/fasthttp"
@@ -16,20 +17,33 @@ func (this *MiraiApiServer) Init() {
 	this.Logger = logger.NewLogger("MiraiAPIServer")
 	this.Logger.Terminal.Color("g")
 	this.Logger.Log("Loading Mirai API Server...")
+	//config
+	this.Logger.Log("Loading config")
+	this.initConfig()
+	this.initNotFoundPage()
 	//router
 	this.Logger.Log("Loading fasthttp router...")
 	this.Router = fasthttprouter.New()
 	this.Router.GET("/getPluginList", PluginListPage)
 	this.Router.GET("/getPluginDetailedInfo", PluginDetailedInfoPage)
-	//config
-	this.Logger.Log("Loading config")
-	this.initConfig()
+	this.Router.NotFound = func(ctx *fasthttp.RequestCtx) {
+		ctx.SetContentType("text/html;charset=utf-8")
+		fmt.Fprintf(ctx, this.NotFoundPage)
+	}
 	//service
 	this.Service = &Service{}
 	this.Service.initScan()
 	//start
 	this.Logger.Log("Starting fasthttp Server")
 	log.Fatal(fasthttp.ListenAndServe(this.Config["listenHTTP"], this.Router.Handler))
+}
+
+func (this *MiraiApiServer) initNotFoundPage() {
+	page, err := ReadFile("static/404.html")
+	if err != nil {
+		this.Logger.Log(err.Error())
+	}
+	this.NotFoundPage = page
 }
 
 func (this *MiraiApiServer) initConfig() {
