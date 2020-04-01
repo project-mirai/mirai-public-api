@@ -20,15 +20,17 @@ func (this *MiraiApiServer) Init() {
 	//config
 	this.Logger.Log("Loading config")
 	this.initConfig()
-	this.initNotFoundPage()
 	//router
 	this.Logger.Log("Loading fasthttp router...")
 	this.Router = fasthttprouter.New()
 	this.Router.GET("/getPluginList", PluginListPage)
 	this.Router.GET("/getPluginDetailedInfo", PluginDetailedInfoPage)
-	this.Router.NotFound = func(ctx *fasthttp.RequestCtx) {
-		ctx.SetContentType("text/html;charset=utf-8")
-		fmt.Fprintf(ctx, this.NotFoundPage)
+	if this.Config["404Support"] == "true" {
+		this.initNotFoundPage()
+		this.Router.NotFound = func(ctx *fasthttp.RequestCtx) {
+			ctx.SetContentType("text/html;charset=utf-8")
+			fmt.Fprintf(ctx, this.NotFoundPage)
+		}
 	}
 	//service
 	this.Service = &Service{}
@@ -39,7 +41,7 @@ func (this *MiraiApiServer) Init() {
 }
 
 func (this *MiraiApiServer) initNotFoundPage() {
-	page, err := ReadFile("static/404")
+	page, err := GetWebPage(this.Config["404PageURL"])
 	if err != nil {
 		this.Logger.Log(err.Error())
 	}

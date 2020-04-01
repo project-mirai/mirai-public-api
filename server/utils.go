@@ -2,6 +2,7 @@ package server
 
 import (
 	"io/ioutil"
+	"net/http"
 	"os"
 )
 
@@ -35,4 +36,21 @@ func ReadFile(path string) (string, error) {
 		return "", err
 	}
 	return string(bytes), nil
+}
+
+func GetWebPage(url string) (string, error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		// handle error
+		return "", err
+	}
+
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		// handle error
+		return string(body), err
+	}
+
+	return string(body), nil
 }
